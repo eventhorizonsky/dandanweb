@@ -45,7 +45,7 @@ export default {
       });
 
     // 在组件挂载后，使用axios发起HTTP请求获取 library 数据
-    axios.get('http://127.0.0.1:82/api/v1/library')
+    axios.get('api/videos')
       .then(response => {
         // 响应成功，将数据保存到 libraryEpisodes
         this.libraryEpisodes = response.data;
@@ -58,17 +58,17 @@ export default {
   methods: {
     // 判断 episodeId 是否存在于 http://127.0.0.1:82/api/v1/library 返回的数据中
     episodeExistsInLibrary(episodeId) {
-      return this.libraryEpisodes.some(libraryEpisode => libraryEpisode.EpisodeId === episodeId);
+      return this.libraryEpisodes.some(libraryEpisode => libraryEpisode.episodeId === episodeId);
     },
     jumpClick(episodeId) {
-      const matchingLibraryEpisode = this.libraryEpisodes.find(libraryEpisode => libraryEpisode.EpisodeId === episodeId);
+      const matchingLibraryEpisode = this.libraryEpisodes.find(libraryEpisode => libraryEpisode.episodeId === episodeId);
 
       if (matchingLibraryEpisode) {
         router.push({
           // name
           name: 'play',
           // 传递参数
-          query: { id: matchingLibraryEpisode.Id }
+          query: { id: matchingLibraryEpisode.id, episodeId:matchingLibraryEpisode.episodeId}
 
         });
       }

@@ -4,20 +4,20 @@
             <v-card class="mx-auto" max-width="auto">
                 <v-container fluid>
                     <v-row dense>
-                        <template v-for="anime in animeList" :key="anime.AnimeId">
+                        <template v-for="anime in animeList" :key="anime.animeId">
 
                             <v-col :cols="6" :md="2">
                                 <v-card>
                                     <v-card @click="jumpClick(anime)">
                                         <v-img gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                                            :src="'https://img.dandanplay.net/anime/' + anime.AnimeId + '_medium.jpg'"
+                                            :src="'https://img.dandanplay.net/anime/' + anime.animeId + '_medium.jpg'"
                                             class="white--text align-end" height="300px">
 
                                         </v-img>
                                     </v-card>
 
                                     <v-card-actions>
-                                        <v-card-title class="pb-0" v-text="anime.AnimeTitle">
+                                        <v-card-title class="pb-0" v-text="anime.animeTitle">
 
                                         </v-card-title>
                                     </v-card-actions>
@@ -43,7 +43,7 @@ export default {
     },
     mounted() {
         // 在组件挂载后，使用axios发起HTTP请求
-        axios.get('http://127.0.0.1:82/api/v1/library')
+        axios.get('api/videos')
             .then(response => {
                 // 响应成功，将数据保存到animeList
                 const apiResponse = response.data;
@@ -63,12 +63,12 @@ export default {
             // 遍历 API 返回的数据
             apiResponse.forEach(item => {
                 // 检查是否已经添加过这个 AnimeId
-                if (!uniqueAnimeIds.has(item.AnimeId) && item.AnimeId) {
+                if (!uniqueAnimeIds.has(item.animeId) && item.animeId) {
                     // 如果没有添加过，则添加到 Set 和结果数组中
-                    uniqueAnimeIds.add(item.AnimeId);
+                    uniqueAnimeIds.add(item.animeId);
                     resultArray.push({
-                        AnimeId: item.AnimeId,
-                        AnimeTitle: item.AnimeTitle
+                        animeId: item.animeId,
+                        animeTitle: item.animeTitle
                     });
                 }
             });
@@ -83,7 +83,7 @@ export default {
                 // name
                 name: 'about',
                 // 传递参数
-                query: {animeId:anime.AnimeId}
+                query: {animeId:anime.animeId}
                 
             });
         }

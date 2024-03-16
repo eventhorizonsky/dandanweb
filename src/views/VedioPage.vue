@@ -22,10 +22,10 @@
           playbackRate: true,
           aspectRatio: true,
           setting: true,
-          url: "http://127.0.0.1:82/api/v1/stream/id/"+route.query.id,
+          url: "api/videos/"+route.query.id+"/stream",
           plugins: [
           artplayerPluginDanmuku({
-              danmuku: 'http://127.0.0.1:82/api/v1/comment/id/'+route.query.id,
+              danmuku: '/api/videos/convert?episodeId='+route.query.episodeId,
               speed: 5, // 弹幕持续时间，单位秒，范围在[1 ~ 10]
               opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
               fontSize: 25, // 字体大小，支持数字和百分比

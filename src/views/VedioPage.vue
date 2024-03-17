@@ -26,7 +26,7 @@
           plugins: [
           artplayerPluginDanmuku({
               danmuku: '/api/videos/convert?episodeId='+route.query.episodeId,
-              speed: 5, // 弹幕持续时间，单位秒，范围在[1 ~ 10]
+              speed: 7, // 弹幕持续时间，单位秒，范围在[1 ~ 10]
               opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
               fontSize: 25, // 字体大小，支持数字和百分比
               color: '#FFFFFF', // 默认字体颜色

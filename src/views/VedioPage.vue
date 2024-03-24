@@ -1,5 +1,7 @@
 <template>
+  <v-container>
     <Artplayer @get-instance="getInstance" :option="option" :style="style" />
+  </v-container>
   </template>
   
   <script>
@@ -50,8 +52,8 @@
         },
         style: {
           width: "1200px",
-          height: "800px",
-          margin: "60px auto 0",
+          height: "600px",
+          margin: "10px auto 0",
         },
       };
     },

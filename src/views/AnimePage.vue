@@ -1,23 +1,89 @@
 <template>
-  <div>
+  <v-container>
+  <v-row>
+    <!-- 侧边弹弹play信息栏 -->
+    <v-col cols="12" md="3" v-if="bangumi!=null">
+      <v-card
+      class="mx-auto">
+      <v-img
+        :src="bangumi.imageUrl"></v-img>
+      <v-card-title>
+        {{bangumi.animeTitle}}
+      </v-card-title>
 
-    <ul>
-      <v-sheet min-height="70vh" rounded="lg">
-      <v-container fluid>
-        <v-row dense>
-          <div v-for="episode in bangumi.episodes" :key="episode.episodeId" style="margin: 20px;">
-
-            <v-btn :disabled=!episodeExistsInLibrary(episode.episodeId) block class="text-none mb-4"
-              color="indigo-darken-3" size="x-large" variant="flat" :cols="6" :md="2"
-              @click="jumpClick(episode.episodeId)">
-              {{ episode.episodeTitle }}
-            </v-btn>
-
-          </div>
+          <v-container>
+      <v-expansion-panels>
+        <v-expansion-panel
+          title="番剧详情"
+        >
+        <v-expansion-panel-text  v-for="metadata in bangumi.metadata" :key="metadata">
+        {{metadata}}</v-expansion-panel-text>
+        </v-expansion-panel>
+      </v-expansion-panels>
+    </v-container>
+  </v-card>
+  </v-col>
+ 
+    <v-col  cols="12" md='9'>
+      <v-row>
+        <v-col  cols="12" md="12" style="padding:10px">  
+          <v-sheet min-height="20vh" rounded="lg">
+            <v-card-title style="font-family: auto;font-weight: bolder;" >
+        {{bangumi.animeTitle}}
+      </v-card-title>
+      <v-container>
+        {{bangumi.summary}}
+      </v-container>
+            <v-container fluid>
+              <v-row style="padding:10px">
+            <v-chip col="3" style="margin: 5px;"  v-for="tag  in bangumi.tags"
+            :key="tag.id"
+            label>  {{ tag.name}}</v-chip>
+ 
         </v-row>
-      </v-container></v-sheet>
-    </ul>
-  </div>
+          </v-container>
+          </v-sheet>
+        </v-col>
+        <v-col  cols="12" md="12">
+      <ul>
+        <v-sheet min-height="20vh" rounded="lg">
+        <v-container fluid>
+          <v-row dense>
+            <div v-for="episode in bangumi.episodes" :key="episode.episodeId" style="margin: 7px;">
+
+              <v-btn :disabled=!episodeExistsInLibrary(episode.episodeId) block 
+                color="indigo-darken-3" variant="flat" :cols="6" :md="2"
+                @click="jumpClick(episode.episodeId)">
+                {{ episode.episodeTitle }}
+              </v-btn>
+
+            </div>
+          </v-row>
+        </v-container></v-sheet>
+      </ul>  
+  </v-col>
+  </v-row>
+  </v-col>
+
+  </v-row>
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+    >
+      {{ snaptext }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="blue"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          关闭
+        </v-btn>
+      </template>
+    </v-snackbar>
+  </v-container>
 </template>
 
 <script>

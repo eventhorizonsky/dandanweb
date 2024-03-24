@@ -1,37 +1,59 @@
 <template>
-    <v-col cols="12" md="12">
-        <v-sheet min-height="70vh" rounded="lg">
-            <v-card class="mx-auto" max-width="auto">
-                <v-container fluid>
-                    <v-row dense>
-                        <template v-for="anime in animeList" :key="anime.animeId">
 
-                            <v-col :cols="6" :md="2">
-                                <v-card>
-                                    <v-card @click="jumpClick(anime)">
-                                        <v-img gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                                            :src="'https://img.dandanplay.net/anime/' + anime.animeId + '_medium.jpg'"
-                                            class="white--text align-end" height="300px">
+        <v-container>
+          <v-row>
+            <v-col cols="2">
+              <v-sheet rounded="lg">
+                <v-list rounded="lg">
+                  <v-list-item
+                    v-for="n in 5"
+                    :key="n"
+                    :title="`占位符 ${n}`"
+                    link
+                  ></v-list-item>
+  
+                  <v-divider class="my-2"></v-divider>
+  
+                  <v-list-item
+                    color="grey-lighten-4"
+                    title="刷新"
+                    link
+                  ></v-list-item>
+                </v-list>
+              </v-sheet>
+            </v-col>
+  
+            <v-col>
+              <v-sheet
+                min-height="70vh"
+                rounded="lg"
+              >
+              <v-container >
+                    <v-row >
+                        <v-col v-for="anime in animeList" :key="anime.animeId" :cols="6" :md="2">
+                            <v-card @click="jumpClick(anime)">
+                                    <v-img gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                                        :src="'https://img.dandanplay.net/anime/' + anime.animeId + '_medium.jpg'"
+                                        class="white--text align-end" height="auto">
+                                    </v-img>
+                                <v-card-actions>
+                                    {{ anime.animeTitle }}
 
-                                        </v-img>
-                                    </v-card>
-
-                                    <v-card-actions>
-                                        <v-card-title class="pb-0" v-text="anime.animeTitle">
-
-                                        </v-card-title>
-                                    </v-card-actions>
-                                </v-card>
-
-                            </v-col>
-                        </template>
+                                </v-card-actions>
+                            </v-card>
+                        </v-col>
                     </v-row>
                 </v-container>
-            </v-card>
-        </v-sheet>
-    </v-col>
-</template>
+              </v-sheet>
+            </v-col>
+          </v-row>
+        </v-container>
+
+  </template>
   
+
+  
+
 <script>
 import axios from 'axios';
 import router from '@/router';
@@ -83,10 +105,14 @@ export default {
                 // name
                 name: 'about',
                 // 传递参数
-                query: {animeId:anime.animeId}
-                
+                query: { animeId: anime.animeId }
+
             });
         }
     },
 };
+
 </script>
+<!-- <script>
+
+</script> -->

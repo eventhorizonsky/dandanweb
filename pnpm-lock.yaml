@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@babel/core': ^7.12.16
   '@babel/eslint-parser': ^7.12.16
+  '@mdi/font': ^7.4.47
   '@vue/cli-plugin-babel': ~5.0.0
   '@vue/cli-plugin-eslint': ~5.0.0
   '@vue/cli-plugin-router': ~5.0.8
@@ -18,6 +19,7 @@ specifiers:
   vuetify: ^3.5.9
 
 dependencies:
+  '@mdi/font': 7.4.47
   '@vue/cli-plugin-router': 5.0.8_@vue+cli-service@5.0.8
   artplayer: 5.1.0
   artplayer-plugin-danmuku: 5.0.1
@@ -1382,6 +1384,10 @@ packages:
 
   /@leichtgewicht/ip-codec/2.0.4:
     resolution: {integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==}
+
+  /@mdi/font/7.4.47:
+    resolution: {integrity: sha512-43MtGpd585SNzHZPcYowu/84Vz2a2g31TvPMTm9uTiCSWzaheQySUcSyUH/46fPnuPQWof2yd0pGBtzee/IQWw==}
+    dev: false
 
   /@nicolo-ribaudo/eslint-scope-5-internals/5.1.1-v1:
     resolution: {integrity: sha512-54/JRvkLIzzDWshCWfuhadfrfZVPiElY8Fcgmg1HroEly/EDSszzhBAsarCux+D/kOslTRquNzuyGSmUSTTHGg==}

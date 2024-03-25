@@ -1,5 +1,5 @@
 // 1. 导入创建路由对象 和 创建hash对象
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
  
 // 2. 导入组件
 import AnimepageVue from '@/views/AnimePage.vue';
@@ -18,7 +18,7 @@ const routes = [
 // 4. 创建路由对象
 const router = new createRouter({
   // 5. 配置路由跳转模式，这里使用 hash 模式
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   // 把映射表放入
   routes
 });

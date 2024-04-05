@@ -1,32 +1,87 @@
-<template>
-  <v-container>
-    <Artplayer @get-instance="getInstance" :option="option" :style="style" />
-  </v-container>
-  </template>
-  
-  <script>
-  import Artplayer from "../components/Artplayer.vue";
-  import artplayerPluginDanmuku from 'artplayer-plugin-danmuku'
-  import { useRoute } from 'vue-router';
+<script setup>
+import { onMounted, onUnmounted, ref,onBeforeMount } from "vue";
+import Artplayer from "artplayer";
+import axios from 'axios';
+import SubtitlesOctopus from "libass-wasm";
+import artplayerPluginDanmuku from 'artplayer-plugin-danmuku'
+import { useRoute } from 'vue-router';
+const subtitlesOctopusWorkJsPath =
+  "/js/JavascriptSubtitlesOctopus/subtitles-octopus-worker.js";
+const route = useRoute();
+var video = {
 
-  export default {
-   
-    setup() {
-      const route = useRoute();
-       console.log(route)
-      return {
-        option: {
-          container: '.artplayer-app',
-          autoSize: true,
-          fullscreen: true,
-          fullscreenWeb: true,
-          flip: true,
-          playbackRate: true,
-          aspectRatio: true,
-          setting: true,
-          url: "api/videos/"+route.query.id+"/stream",
-          plugins: [
-          artplayerPluginDanmuku({
+};
+
+
+
+var fonts = [
+  "/static/SourceHanSansCN-Bold.woff2"
+];
+
+var artRef = ref();
+var art = ref();
+const subtitleOctopus = ref();
+const tmpSubtitleOctopusSubUrl = ref("");
+
+const artplayerPluginAss = function(options) {
+  return function(art) {
+    const instance = new SubtitlesOctopus({
+      ...options,
+      video: art.template.$video,
+    });
+
+    instance.canvasParent.style.zIndex = 20;
+    art.on("destroy", () => instance.dispose());
+
+    subtitleOctopus.value = instance;
+    return {
+      name: "artplayerPluginAss",
+      instance: instance,
+    };
+  };
+};
+onMounted(function() {
+
+  axios.get('/api/videos/' + route.query.id+"/playerInfo") // 替换成实际的API URL
+      .then(response => {
+        // 响应成功，将数据保存到 bangumi
+        
+        video = response.data;
+        console.log("3")
+        console.log(video)
+        art.value = new Artplayer({
+    container: artRef.value,
+    url: video.url,
+    poster: video.poster,
+    volume: 0.5,
+    isLive: false,
+    muted: false,
+    autoplay: false,
+    pip: true,
+    autoSize: true,
+    autoMini: true,
+    screenshot: true,
+    setting: true,
+    loop: true,
+    flip: true,
+    playbackRate: true,
+    aspectRatio: true,
+    fullscreen: true,
+    fullscreenWeb: true,
+    subtitleOffset: false,
+    miniProgressBar: true,
+    mutex: true,
+    backdrop: true,
+    playsInline: true,
+    autoPlayback: true,
+    airplay: true,
+    theme: "skyblue",
+    lang: navigator.language.toLowerCase(),
+    moreVideoAttr: {
+      crossOrigin: "anonymous",
+    },
+    plugins: [
+    artplayerPluginDanmuku({
               danmuku: '/api/videos/convert?episodeId='+route.query.episodeId,
               speed: 7, // 弹幕持续时间，单位秒，范围在[1 ~ 10]
               opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
@@ -48,22 +103,83 @@
               // 通过 mount 选项可以自定义输入框挂载的位置，默认挂载于播放器底部，仅在当宽度小于最小值时生效
               // mount: document.querySelector('.artplayer-danmuku'),
           }),
-      ],
+      artplayerPluginAss({
+        fonts: fonts,
+        subUrl: video.subtitles[0].url,
+        workerUrl: subtitlesOctopusWorkJsPath,
+      }),
+    ],
+    settings: [
+      {
+        width: 200,
+        html: "字幕",
+        tooltip: "选择",
+        icon: '<img width="22" heigth="22" src="/svg/subtitle.svg">',
+        selector: [
+          {
+            html: "开启",
+            tooltip: "显示",
+            switch: true,
+            onSwitch: function (item) {
+              item.tooltip = item.switch ? "隐藏" : "显示";
+              if (item.switch) {
+                tmpSubtitleOctopusSubUrl.value = subtitleOctopus.value.subUrl;
+                subtitleOctopus.value.freeTrack();
+              } else {
+                subtitleOctopus.value.setTrackByUrl(
+                  tmpSubtitleOctopusSubUrl.value
+                );
+                subtitleOctopus.value.setSubUrl(tmpSubtitleOctopusSubUrl.value);
+              }
+              return !item.switch;
+            },
+          },
+          ...video.subtitles.map((subtitle, index) => ({
+              default: subtitle.default,
+              html: subtitle.name,
+              url: subtitle.url,
+            })),
+        ],
+        onSelect: function (item) {
+          const newSubtitleUrl = item.url;
+          tmpSubtitleOctopusSubUrl.value = newSubtitleUrl;
+          subtitleOctopus.value.setTrackByUrl(newSubtitleUrl);
+          subtitleOctopus.value.setSubUrl(newSubtitleUrl);
+          return item.html;
         },
-        style: {
-          width: "1200px",
-          height: "600px",
-          margin: "10px auto 0",
-        },
-      };
-    },
-    components: {
-      Artplayer,
-    },
-    methods: {
-      getInstance(art) {
-        console.info(art);
       },
-    },
-  };
-  </script>
+    ],
+    contextmenu: [
+      {
+        html: "Custom menu",
+        click: function (contextmenu) {
+          console.info("You clicked on the custom menu");
+          contextmenu.show = false;
+        },
+      },
+    ],
+  });
+      })
+      .catch(error => {
+        // 处理错误
+        console.error('Error fetching bangumi data:', error);
+      });
+
+});
+onUnmounted(function() {
+  if (art.value) {
+    art.value.destroy(false);
+  }
+});
+
+</script>
+
+<template>
+  <div align="center">
+    <div style="width: 70%; min-height: 500px">
+      <div ref="artRef" style="width: 100%; height: 700px"></div>
+    </div>
+  </div>
+</template>
+
+<style scoped></style>

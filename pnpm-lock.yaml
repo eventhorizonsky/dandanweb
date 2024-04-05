@@ -14,6 +14,7 @@ specifiers:
   core-js: ^3.8.3
   eslint: ^7.32.0
   eslint-plugin-vue: ^8.0.3
+  libass-wasm: ^4.1.0
   vue: ^3.4.21
   vue-router: ^4.2.5
   vuetify: ^3.5.9
@@ -25,6 +26,7 @@ dependencies:
   artplayer-plugin-danmuku: 5.0.1
   axios: 1.6.5
   core-js: 3.35.0
+  libass-wasm: 4.1.0
   vue: 3.4.21
   vue-router: 4.2.5_vue@3.4.21
   vuetify: 3.5.9_vue@3.4.21
@@ -4379,6 +4381,10 @@ packages:
       prelude-ls: 1.2.1
       type-check: 0.4.0
     dev: true
+
+  /libass-wasm/4.1.0:
+    resolution: {integrity: sha512-+RbYT/uuI6VHExCmGyUuMg3A2gQOaCRTzSn8GGDSf3q4cEoUNiINd9u4RGfZXA1UKafW+Hv8bmcKIX4FKbSh0Q==}
+    dev: false
 
   /lilconfig/2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}

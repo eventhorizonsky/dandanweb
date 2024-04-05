@@ -13,7 +13,7 @@ import {
     useRoute
 } from 'vue-router';
 const subtitlesOctopusWorkJsPath =
-    "/js/JavascriptSubtitlesOctopus/subtitles-octopus-worker.js";
+    "/js/JavascriptSubtitlesOctopus/subtitles-octopus-worker-legacy.js";
 const route = useRoute();
 var video = {
 
@@ -112,6 +112,7 @@ onMounted(function () {
                         artplayerPluginAss({
                             fonts: fonts,
                             subUrl: video.subtitles[0].url,
+                            fallbackFont:"/static/SourceHanSansCN-Bold.woff2",
                             workerUrl: subtitlesOctopusWorkJsPath,
                         }),
                     ],

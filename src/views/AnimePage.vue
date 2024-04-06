@@ -134,7 +134,7 @@ export default {
           // name
           name: 'play',
           // 传递参数
-          query: { id: matchingLibraryEpisode.id, episodeId:matchingLibraryEpisode.episodeId}
+          query: { id: matchingLibraryEpisode.id, episodeId:matchingLibraryEpisode.episodeId,animeId:matchingLibraryEpisode.animeId}
 
         });
       }

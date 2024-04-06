@@ -1,58 +1,33 @@
 <template>
-
-        <v-container>
-          <v-row>
-            <v-col cols="2">
-              <v-sheet rounded="lg">
+    <v-row class="pa-2 ma-2">
+        <v-col :cols="2" v-if="$vuetify.display.mdAndUp" >
+            <v-sheet rounded="lg">
                 <v-list rounded="lg">
-                  <v-list-item
-                    v-for="n in 5"
-                    :key="n"
-                    :title="`占位符 ${n}`"
-                    link
-                  ></v-list-item>
-  
-                  <v-divider class="my-2"></v-divider>
-  
-                  <v-list-item
-                    color="grey-lighten-4"
-                    title="刷新"
-                    link
-                  ></v-list-item>
+                    <v-list-item v-for="n in 5" :key="n" :title="`占位符 ${n}`" link></v-list-item>
+
+                    <v-divider class="my-2"></v-divider>
+
+                    <v-list-item color="grey-lighten-4" title="刷新" link></v-list-item>
                 </v-list>
-              </v-sheet>
-            </v-col>
-  
-            <v-col>
-              <v-sheet
-                min-height="70vh"
-                rounded="lg"
-              >
-              <v-container >
-                    <v-row >
+            </v-sheet>
+        </v-col>
+
+        <v-col>
+            <v-sheet min-height="70vh" rounded="lg">
+                    <v-row class="pa-4">
                         <v-col v-for="anime in animeList" :key="anime.animeId" :cols="6" :md="2">
                             <v-card @click="jumpClick(anime)">
-                                    <v-img gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                                        :src="'https://img.dandanplay.net/anime/' + anime.animeId + '_medium.jpg'"
-                                        class="white--text align-end" height="auto">
-                                    </v-img>
-                                <v-card-actions>
-                                    {{ anime.animeTitle }}
-
-                                </v-card-actions>
+                                <v-img  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" :src="'https://img.dandanplay.net/anime/' + anime.animeId + '_medium.jpg'" class="white--text align-end" cover height="250">
+                                 
+                                </v-img>
+                                <v-card-text style="font-weight: bold;" class="ellipsis" v-text="anime.animeTitle"></v-card-text>
                             </v-card>
                         </v-col>
                     </v-row>
-                </v-container>
-              </v-sheet>
-            </v-col>
-          </v-row>
-        </v-container>
-
-  </template>
-  
-
-  
+            </v-sheet>
+        </v-col>
+    </v-row>
+</template>
 
 <script>
 import axios from 'axios';
@@ -98,21 +73,37 @@ export default {
             // 将结果保存到animeList
             this.animeList = resultArray;
         },
+        calculateFontSize(title) {
+            // 根据标题的长度来计算字体大小，你可以根据需要调整系数和基准大小
+            const baseFontSize = 15; // 基准字体大小
+            const scaleFactor = 0.8; // 缩放系数，可以根据需要调整
+            const maxLength = 8; // 最大标题长度，超过这个长度将开始缩小字体
 
+            let fontSize = baseFontSize;
+            if (title.length > maxLength) {
+                fontSize = baseFontSize * scaleFactor;
+            }
+            return fontSize + 'px';
+        },
         jumpClick(anime) {
             // 3. name跳转
             router.push({
                 // name
                 name: 'about',
                 // 传递参数
-                query: { animeId: anime.animeId }
+                query: {
+                    animeId: anime.animeId
+                }
 
             });
         }
     },
 };
-
 </script>
-<!-- <script>
-
-</script> -->
+<style>
+.ellipsis {
+  height: 60px;
+  overflow: hidden;
+  font-weight: bold;
+}
+</style>

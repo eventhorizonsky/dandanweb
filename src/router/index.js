@@ -5,6 +5,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import AnimepageVue from '@/views/AnimePage.vue';
 import HomepageVue from '@/views/HomePage.vue';
 import VediopageVue from '@/views/VedioPage.vue';
+import MylovepageVue from '@/views/MylovePage.vue';
 import videolist from '@/views/admin/VideoList.vue';
 // 3. 配置路由映射关系表
 const routes = [
@@ -12,6 +13,7 @@ const routes = [
   {path: '/', component:HomepageVue },
   {name:'about', path: '/about', component: AnimepageVue },
   {name:'play', path: '/play', component: VediopageVue },
+  {name:'mylove', path: '/mylove', component: MylovepageVue },
   {name:'videolist', path: '/admin/videolist', component: videolist },
 ];
  

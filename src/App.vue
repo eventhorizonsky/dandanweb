@@ -87,7 +87,7 @@
         </v-btn>
     </v-bottom-navigation>
     <v-dialog v-model="logoutDialog" width="auto">
-        <v-card min-width="400" prepend-icon="mdi-update" text="点击确认登出账号" title="确定登出吗">
+        <v-card max-width="400" prepend-icon="mdi-update" text="点击确认登出账号" title="确定登出吗">
             <template v-slot:actions>
                 <v-btn class="ms-auto" text="Ok" @click="logout"></v-btn>
             </template>

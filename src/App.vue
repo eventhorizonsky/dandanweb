@@ -42,15 +42,23 @@
         <v-responsive max-width="250">
             <v-text-field density="compact" label="搜索" rounded="lg" variant="solo-filled" flat hide-details single-line></v-text-field>
         </v-responsive>
-        <!-- 功能键组合 -->
-        <v-btn icon v-if="$vuetify.theme.dark==false" @click="changedark()">
-            <v-icon>mdi-weather-night</v-icon>
+        <v-btn v-if="!loginStatus" icon="mdi-account-circle" @click="loginDialog=true">
         </v-btn>
-        <v-btn icon v-if="$vuetify.theme.dark==true" @click="changedark()">
-            <v-icon>mdi-white-balance-sunny</v-icon>
-        </v-btn>
-        <v-btn icon="mdi-account-circle" @click="loginDialog=true">
-        </v-btn>
+        <v-menu v-else>
+            <template v-slot:activator="{ props }">
+                <v-btn v-bind="props" icon="$vuetify">
+                    <v-avatar>
+                        <v-img :alt="loginUser.screenName" :src="loginUser.profileImage" @click="menu"></v-img>
+                    </v-avatar>
+                </v-btn>
+            </template>
+
+            <v-list>
+                <v-list-item min-width="100" @click="logoutDialog=true">
+                    登出
+                </v-list-item>
+            </v-list>
+        </v-menu>
     </v-app-bar>
 
     <!-- 侧边栏 -->
@@ -87,17 +95,16 @@
     </v-dialog>
     <v-dialog v-model="loginDialog" width="600">
         <v-card class="mx-auto pa-12 pb-8" elevation="8" max-width="448" rounded="lg">
-          
-                <h2  class="mx-auto my-6"
-      max-width="228">登录</h2>
-                <v-text-field label="账号" @keyup.enter="login" density="compact" v-model="loginName" placeholder="Email address" prepend-inner-icon="mdi-email-outline" variant="outlined"></v-text-field>
-                <v-text-field label="密码" @keyup.enter="login" v-model="passWord" :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" :type="visible ? 'text' : 'password'" density="compact" placeholder="Enter your password" prepend-inner-icon="mdi-lock-outline" variant="outlined" @click:append-inner="visible = !visible"></v-text-field>
-                <v-card class="mb-12" color="surface-variant" variant="tonal">
-                    <v-card-text class="text-medium-emphasis text-caption">
-                        本项目使用的账号密码为弹弹play官方的账号密码，相关信息来源也来自弹弹play，请在使用前先注册弹弹账号
-                    </v-card-text>
-                </v-card>
-            
+
+            <h2 class="mx-auto my-6" max-width="228">登录</h2>
+            <v-text-field label="账号" @keyup.enter="login" density="compact" v-model="loginName" placeholder="Email address" prepend-inner-icon="mdi-email-outline" variant="outlined"></v-text-field>
+            <v-text-field label="密码" @keyup.enter="login" v-model="passWord" :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" :type="visible ? 'text' : 'password'" density="compact" placeholder="Enter your password" prepend-inner-icon="mdi-lock-outline" variant="outlined" @click:append-inner="visible = !visible"></v-text-field>
+            <v-card class="mb-12" color="surface-variant" variant="tonal">
+                <v-card-text class="text-medium-emphasis text-caption">
+                    本项目使用的账号密码为弹弹play官方的账号密码，相关信息来源也来自弹弹play，请在使用前先注册弹弹账号
+                </v-card-text>
+            </v-card>
+
             <v-btn class="mb-8" color="blue" size="large" variant="tonal" block @click="login" :loading="isloading">
                 登录
             </v-btn>
@@ -106,7 +113,7 @@
                     前往注册<v-icon icon="mdi-chevron-right"></v-icon>
                 </a>
             </v-card-text>
-          
+
         </v-card>
     </v-dialog>
 </v-app>

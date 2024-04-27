@@ -141,7 +141,7 @@ onMounted(function () {
                             },
                             ...video.subtitles.map((subtitle, index) => ({
                                 default: subtitle.default,
-                                html: subtitle.name,
+                                html: subtitle.subtitleName,
                                 url: subtitle.url,
                             })),
                         ],

@@ -39,21 +39,16 @@
                     </v-sheet>
                 </v-col>
                 <v-col cols="12" md="12">
-                    <ul>
                         <v-sheet min-height="20vh" rounded="lg">
                             <v-container fluid>
                                 <v-row dense>
-                                    <div v-for="episode in bangumi.episodes" :key="episode.episodeId" style="margin: 7px;">
-
-                                        <v-btn :disabled=!episodeExistsInLibrary(episode.episodeId) block color="indigo-darken-3" variant="flat" :cols="6" :md="2" @click="jumpClick(episode.episodeId)">
-                                            {{ episode.episodeTitle }}
-                                        </v-btn>
-
-                                    </div>
+                                    <v-col cols="6" md='3' v-for="episode in bangumi.episodes" :key="episode.episodeId">
+                                        <v-card class="ma-2" v-if="episodeExistsInLibrary(episode.episodeId)" variant="tonal" :subtitle="episode.episodeTitle"  :title="episode.episodeNumber" color="indigo" label="indigo" @click="jumpClick(episode.episodeId)"  hover></v-card>
+                                        <v-card class="ma-2" v-else variant="outlined" :subtitle="episode.episodeTitle"  :title="episode.episodeNumber" disabled="false" @click="jumpClick(episode.episodeId)"  hover></v-card>
+                                    </v-col>
                                 </v-row>
                             </v-container>
                         </v-sheet>
-                    </ul>
                 </v-col>
             </v-row>
         </v-col>

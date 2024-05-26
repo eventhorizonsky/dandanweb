@@ -114,6 +114,7 @@ onMounted(function () {
                             subUrl: video.subtitles[0].url,
                             fallbackFont:"/static/SourceHanSansCN-Bold.woff2",
                             workerUrl: subtitlesOctopusWorkJsPath,
+                            timeOffset:video.subtitles[0].timeOffset
                         }),
                     ],
                     settings: [{

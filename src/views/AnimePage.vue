@@ -93,7 +93,7 @@ export default {
             });
 
         // 在组件挂载后，使用axios发起HTTP请求获取 library 数据
-        axios.get('api/videos')
+        axios.get('api/videos/anime?animeId='+route.query.animeId)
             .then(response => {
                 // 响应成功，将数据保存到 libraryEpisodes
                 this.libraryEpisodes = response.data;

@@ -10,8 +10,20 @@
         <v-spacer></v-spacer>
 
         <v-responsive max-width="240">
-            <v-text-field density="compact" label="搜索" rounded="lg" variant="solo-filled" flat hide-details single-line></v-text-field>
-        </v-responsive>
+    <v-text-field
+        density="compact"
+        v-model="searchQuery"
+        @keyup.enter="searchAnime()"
+        @input="onSearchInput"
+        label="搜索"
+        rounded="lg"
+        variant="solo-filled"
+        flat
+        hide-details
+        single-line>
+    </v-text-field>
+</v-responsive>
+
         <v-spacer></v-spacer>
 
         <v-spacer></v-spacer>
@@ -121,6 +133,7 @@
 
 <script>
 import axios from 'axios';
+import router from '@/router';
 export default {
     data() {
         return {
@@ -130,6 +143,7 @@ export default {
             visible: false,
             loginName: '',
             passWord: '',
+            searchQuery: '',
             snackbar: false,
             message: '',
             snackbarColor: '',
@@ -173,6 +187,7 @@ export default {
         };
     },
     mounted() {
+
         if (localStorage.hasOwnProperty('loginUser')) {
             var loginUserStr = localStorage.getItem("loginUser");
             this.loginUser = JSON.parse(loginUserStr)
@@ -193,6 +208,14 @@ export default {
             this.message = '登出成功'
             this.snackbarColor = 'green'
         },
+        searchAnime() {
+        this.$router.push({ path: '/', query: { animeTitle: this.searchQuery } });
+    },
+    onSearchInput() {
+        if (this.searchQuery === '') {
+            this.$router.push({ path: '/', query: {} });
+        }
+    },
         login() {
             this.isloading = true
             const requestBody = {

@@ -10,19 +10,9 @@
         <v-spacer></v-spacer>
 
         <v-responsive max-width="240">
-    <v-text-field
-        density="compact"
-        v-model="searchQuery"
-        @keyup.enter="searchAnime()"
-        @input="onSearchInput"
-        label="搜索"
-        rounded="lg"
-        variant="solo-filled"
-        flat
-        hide-details
-        single-line>
-    </v-text-field>
-</v-responsive>
+            <v-text-field density="compact" v-model="searchQuery" @keyup.enter="searchAnime()" @input="onSearchInput" label="搜索" rounded="lg" variant="solo-filled" flat hide-details single-line>
+            </v-text-field>
+        </v-responsive>
 
         <v-spacer></v-spacer>
 
@@ -52,7 +42,8 @@
         <!-- 侧边栏开关 -->
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-responsive max-width="250">
-            <v-text-field density="compact" label="搜索" rounded="lg" variant="solo-filled" flat hide-details single-line></v-text-field>
+            <v-text-field density="compact" v-model="searchQuery" @keyup.enter="searchAnime()" @input="onSearchInput" label="搜索" rounded="lg" variant="solo-filled" flat hide-details single-line>
+            </v-text-field>
         </v-responsive>
         <v-btn v-if="!loginStatus" icon="mdi-account-circle" @click="loginDialog=true">
         </v-btn>
@@ -209,13 +200,21 @@ export default {
             this.snackbarColor = 'green'
         },
         searchAnime() {
-        this.$router.push({ path: '/', query: { animeTitle: this.searchQuery } });
-    },
-    onSearchInput() {
-        if (this.searchQuery === '') {
-            this.$router.push({ path: '/', query: {} });
-        }
-    },
+            this.$router.push({
+                path: '/',
+                query: {
+                    animeTitle: this.searchQuery
+                }
+            });
+        },
+        onSearchInput() {
+            if (this.searchQuery === '') {
+                this.$router.push({
+                    path: '/',
+                    query: {}
+                });
+            }
+        },
         login() {
             this.isloading = true
             const requestBody = {

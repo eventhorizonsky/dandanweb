@@ -7,10 +7,12 @@ import HomepageVue from '@/views/HomePage.vue';
 import VediopageVue from '@/views/VedioPage.vue';
 import MylovepageVue from '@/views/MylovePage.vue';
 import videolist from '@/views/admin/VideoList.vue';
+import AnimeListpageVue from '@/views/AnimeListPage.vue';
 // 3. 配置路由映射关系表
 const routes = [
   // 路径和组件映射起来
   {path: '/', component:HomepageVue },
+  {path: '/AnimeList', component:AnimeListpageVue },
   {name:'about', path: '/about', component: AnimepageVue },
   {name:'play', path: '/play', component: VediopageVue },
   {name:'mylove', path: '/mylove', component: MylovepageVue },

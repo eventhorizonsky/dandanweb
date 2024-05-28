@@ -201,7 +201,7 @@ export default {
         },
         searchAnime() {
             this.$router.push({
-                path: '/',
+                path: '/AnimeList',
                 query: {
                     animeTitle: this.searchQuery
                 }

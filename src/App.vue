@@ -26,7 +26,7 @@
             v-if="!$vuetify.display.smAndDown"
             class="me-sm-8"
             max-width="40"
-            src="https://cdn.vuetifyjs.com/docs/images/logos/v.svg"
+            :src="require('@/assets/logo.png')"
         />
 
         <template v-if="$vuetify.display.mdAndUp">

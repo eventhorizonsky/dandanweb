@@ -40,26 +40,26 @@
         </template>
         <v-spacer/>
 
-            <v-text-field
-                :loading="loading"
-                :width="300"
-                append-inner-icon="mdi-magnify"
-                density="compact"
-                label="搜索"
-                v-model="searchQuery"
-                color="primary"
-                @keyup.enter="searchAnime()"
-                @input="onSearchInput"
-                variant="outlined"
-                hide-details
-                single-line
-                @click:append-inner="searchAnime()"
-            ></v-text-field>
+        <v-text-field
+            :loading="loading"
+            :width="300"
+            append-inner-icon="mdi-magnify"
+            density="compact"
+            label="搜索"
+            v-model="searchQuery"
+            color="primary"
+            @keyup.enter="searchAnime()"
+            @input="onSearchInput"
+            variant="outlined"
+            hide-details
+            single-line
+            @click:append-inner="searchAnime()"
+        ></v-text-field>
 
         <v-spacer v-if="$vuetify.display.smAndDown"/>
 
         <template #append>
-          <v-btn class="ms-1" color="medium-emphasis" icon="mdi-bell-outline"  v-if="!$vuetify.display.smAndDown"/>
+          <v-btn class="ms-1" color="medium-emphasis" icon="mdi-bell-outline" v-if="!$vuetify.display.smAndDown"/>
 
           <v-btn v-if="!loginStatus" icon="mdi-account-circle" @click="loginDialog=true">
           </v-btn>

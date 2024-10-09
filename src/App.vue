@@ -152,11 +152,15 @@ export default {
       links: [{
         name: '首页',
         href: "/"
+      }, {
+        name: '追番',
+        href: "/mylove"
       },
         {
-          name: '追番',
-          href: "/mylove"
+          name: '番剧列表',
+          href: "/AnimeList"
         },
+
         {
           name: '观看历史',
           href: "/history"
@@ -170,16 +174,18 @@ export default {
         name: '首页',
         href: "/",
         icon: "mdi-home"
+      }, {
+        name: '消息',
+        href: "/"
+      }, {
+        name: '追番',
+        href: "/mylove",
+        icon: "mdi-heart"
+      }, {
+        name: '番剧列表',
+        href: "/AnimeList"
       },
-        {
-          name: '追番',
-          href: "/mylove",
-          icon: "mdi-heart"
-        },
-        {
-          name: '消息',
-          href: "/"
-        },
+
         {
           name: '观看历史',
           href: "/history",

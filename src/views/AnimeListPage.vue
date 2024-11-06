@@ -10,7 +10,7 @@
           <v-col v-for="anime in animeList" :key="anime.animeId" :cols="6" :md="2">
             <v-card @click="jumpClick(anime)">
               <v-img gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                     :src="'https://img.dandanplay.net/anime/' + anime.animeId + '_medium.jpg'"
+                     :src="'https://img.dandanplay.net/anime/' + anime.animeId + '.jpg'"
                      class="white--text align-end" cover height="250">
 
               </v-img>

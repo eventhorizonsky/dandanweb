@@ -5,7 +5,7 @@
                     <v-row>
                         <v-col v-for="anime in recentAnime" :key="anime.animeId" cols="6" md="2">
                             <v-card @click="jumpClick(anime)">
-                                <v-img gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" :src="'https://img.dandanplay.net/anime/' + anime.animeId + '_medium.jpg'" class="white--text align-end" cover height="200"></v-img>
+                                <v-img gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" :src="'https://img.dandanplay.net/anime/' + anime.animeId + '.jpg'" class="white--text align-end" cover height="200"></v-img>
                                 <v-card-text style="font-weight: bold;" class="ellipsis" v-text="anime.animeTitle"></v-card-text>
                             </v-card>
                         </v-col>
@@ -31,7 +31,7 @@
                     <v-row>
                         <v-col v-for="anime in filteredAnimeList(whatDay)" :key="anime.animeId" cols="6" md="2">
                             <v-card @click="jumpClick(anime)">
-                                <v-img gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" :src="'https://img.dandanplay.net/anime/' + anime.animeId + '_medium.jpg'" class="white--text align-end" cover height="200"></v-img>
+                                <v-img gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" :src="'https://img.dandanplay.net/anime/' + anime.animeId + '.jpg'" class="white--text align-end" cover height="200"></v-img>
                                 <v-card-text style="font-weight: bold;" class="ellipsis" v-text="anime.animeTitle"></v-card-text>
                             </v-card>
                         </v-col>

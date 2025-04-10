@@ -1,0 +1,20 @@
+name: Trigger Dispatch Event
+
+on:
+  push:
+    branches:
+      - master  # 设置为在推送到 main 分支时触发，可以根据需求修改
+
+jobs:
+  trigger-dispatch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Dispatch Event
+        env:
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+        run: |
+          curl -X POST https://api.github.com/repos/eventhorizonsky/dandanServer/dispatches \
+          -H "Authorization: token $AUTH_TOKEN" \
+          -H "Accept: application/vnd.github.everest-preview+json" \
+          -d '{"event_type": "dandanweb-push"}'

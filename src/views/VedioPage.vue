@@ -13,7 +13,9 @@ import {
     useRoute
 } from 'vue-router';
 const subtitlesOctopusWorkJsPath =
-    "/js/JavascriptSubtitlesOctopus/subtitles-octopus-worker-legacy.js";
+    "/js/JavascriptSubtitlesOctopus/subtitles-octopus-worker.js";
+const subtitlesOctopusWorkWasmPath =
+    "/js/JavascriptSubtitlesOctopus/subtitles-octopus-worker.wasm";
 const route = useRoute();
 var video = {
 
@@ -114,6 +116,7 @@ onMounted(function () {
                             subUrl: video.subtitles[0].url,
                             fallbackFont:"/static/SourceHanSansCN-Bold.woff2",
                             workerUrl: subtitlesOctopusWorkJsPath,
+                            wasmUrl:subtitlesOctopusWorkWasmPath,
                             timeOffset:video.subtitles[0].timeOffset
                         }),
                     ],

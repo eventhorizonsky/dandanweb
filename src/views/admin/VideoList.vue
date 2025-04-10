@@ -96,7 +96,7 @@
       <v-data-table
             :headers="matchheaders"
             :items="matchResult"
-            :search="search"
+            :search="matchSearch"
         >
         <template v-slot:item.operation="{ item }">
             <div class="text-end">
@@ -123,7 +123,8 @@
   export default {
     data() {
       return {
-        search: '',
+        search: '',  // 主表格搜索
+        matchSearch: '',  // 新增：匹配对话框搜索
         headers: [
           { title: '文件名称', key: 'fileName'},
           { title: '文件大小', key: 'fileSize'},
@@ -235,5 +236,5 @@
     },
     },
   };
-  </script>
+</script>
   
